@@ -4,9 +4,11 @@ import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import ContactModal from "./ContactModal"
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const [isContactModalOpen, setIsContactModalOpen] = useState(false)
 
     return (
         <motion.nav 
@@ -60,6 +62,7 @@ export default function Navbar() {
                     <Button
                         variant="outline"
                         className="hidden md:flex border-white/20 text-white hover:bg-white hover:text-black bg-transparent font-mono text-xs tracking-wider"
+                        onClick={() => setIsContactModalOpen(true)}
                     >
                         CONTACT US
                     </Button>
@@ -145,6 +148,10 @@ export default function Navbar() {
                                 <Button
                                     variant="outline"
                                     className="w-full border-white/20 text-white hover:bg-white hover:text-black bg-transparent font-mono text-xs tracking-wider mt-3"
+                                    onClick={() => {
+                                        setIsContactModalOpen(true)
+                                        setIsMenuOpen(false)
+                                    }}
                                 >
                                     CONTACT US
                                 </Button>
@@ -153,6 +160,12 @@ export default function Navbar() {
                     </motion.div>
                 )}
             </AnimatePresence>
+
+            {/* Contact Modal */}
+            <ContactModal 
+                isOpen={isContactModalOpen} 
+                onClose={() => setIsContactModalOpen(false)} 
+            />
         </motion.nav>
     )
 }

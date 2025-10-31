@@ -4,67 +4,65 @@ import { Button } from "@/components/ui/button"
 import { Play, Users, ChevronLeft, ChevronRight } from "lucide-react"
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import MyNewProject from "../assets/jxBvZQ.png"
+import Losmen from "../assets/VpUjY1.png"
+import Tetra from "../assets/Jps9NB.png"
+import PressTheBeat from "../assets/V_sfHB.jpg"
+import Raturu from "../assets/n6WJ03.png"
+import BG from '../assets/bg.png'
 
 export default function HeroSection() {
-    const [glitchText, setGlitchText] = useState("PLACEHOLDER TEXT")
+    const [glitchText, setGlitchText] = useState("WIZZY STUDIO")
     const [currentSlide, setCurrentSlide] = useState(0)
 
     const glitchVariants = [
-        "PLACEHOLDER TEXT",
-        "PL4C3H0LD3R T3XT",
-        "P̴L̴A̴C̴E̴H̴O̴L̴D̴E̴R̴ ̴T̴E̴X̴T̴",
-        "PLACEHOLDER TEXT"
+        "WIZZY STUDIO",
+        "W1ZZY 5TUD10",
+        "W̴I̴Z̴Z̴Y̴ ̴S̴T̴U̴D̴I̴O̴",
+        "WIZZY STUDIO"
     ]
 
     // Carousel data with placeholder content
     const carouselSlides = [
         {
             id: 1,
-            title: "VOID",
-            subtitle: "Visual Novel",
-            image: "https://picsum.photos/910/336?random=1",
-            link: "#",
-            description: "Developer: Placeholder Studio. Publisher: Placeholder Games Inc."
+            title: "My New Project (1)",
+            subtitle: "Backroom Horror",
+            image: MyNewProject,
+            link: "https://buzzy-wizzy-studio.itch.io/my-new-project-1",
+            description: "Adventure game where you play as a developer trapped inside your own digital creation."
         },
         {
             id: 2,
-            title: "ANIMA SPECTRA",
+            title: "LOSMEN",
             subtitle: "Adventure Game",
-            image: "https://picsum.photos/910/336?random=2",
-            link: "#",
-            description: "Developer: Placeholder Studio. Publisher: Placeholder Games Inc."
+            image: Losmen,
+            link: "https://buzzy-wizzy-studio.itch.io/lost-man",
+            description: "Kamu terdampar sendirian di dunia yang udah rusak. Nggak ada arah, nggak ada tujuan pasti, yang penting bertahan hidup."
         },
         {
             id: 3,
-            title: "XAGIA WARS",
+            title: "TETRA",
             subtitle: "Strategy Game",
-            image: "https://picsum.photos/910/336?random=3",
-            link: "#",
-            description: "Developer: Placeholder Studio. Publisher: Placeholder Games Inc."
+            image: Tetra,
+            link: "https://buzzy-wizzy-studio.itch.io/tetra",
+            description: "What if Tetris wasn’t just a puzzle, but a battle?"
         },
         {
             id: 4,
-            title: "FIRESIDE",
+            title: "PRESS THE BEAT",
             subtitle: "Interactive Story",
-            image: "https://picsum.photos/910/336?random=4",
-            link: "#",
+            image: PressTheBeat,
+            link: "https://buzzy-wizzy-studio.itch.io/press-the-beat",
             description: "Developer: Placeholder Studio. Publisher: Placeholder Games Inc."
         },
         {
             id: 5,
-            title: "STELLA GALE",
-            subtitle: "The Trials of Faith",
-            image: "https://picsum.photos/910/336?random=5",
-            link: "#",
-            description: "Developer: Placeholder Studio. Publisher: Placeholder Games Inc."
-        },
-        {
-            id: 6,
-            title: "GARUDA",
-            subtitle: "Action RPG",
-            image: "https://picsum.photos/910/336?random=6",
-            link: "#",
-            description: "Developer: Placeholder Studio. Publisher: Placeholder Games Inc."
+            title: "RATURU: HOME FEVER",
+            subtitle: "Horror Game",
+            image: Raturu,
+            link: "https://buzzy-wizzy-studio.itch.io/raturu-home-fever",
+            description: "In RATURU : Home Fever, you step into the feverish dreams of a young child battling a high fever."
         }
     ]
 
@@ -74,7 +72,7 @@ export default function HeroSection() {
             setGlitchText(glitchVariants[randomIndex])
 
             setTimeout(() => {
-                setGlitchText("PLACEHOLDER TEXT")
+                setGlitchText("WIZZY STUDIO")
             }, 150)
         }, 3000)
 
@@ -85,7 +83,7 @@ export default function HeroSection() {
     useEffect(() => {
         const carouselInterval = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % carouselSlides.length)
-        }, 5000)
+        }, 10000)
 
         return () => clearInterval(carouselInterval)
     }, [carouselSlides.length])
@@ -106,55 +104,23 @@ export default function HeroSection() {
                 <motion.div 
                     className="w-full h-full bg-cover bg-center bg-no-repeat"
                     style={{
-                        backgroundImage: `url('data:image/svg+xml;base64,${btoa(`
-                            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                                <rect width="100%" height="100%" fill="#6b7280"/>
-                                <rect x="0" y="0" width="100%" height="100%" fill="url(#gradient)" opacity="0.3"/>
-                                <defs>
-                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" style="stop-color:#4b5563;stop-opacity:0.5" />
-                                        <stop offset="50%" style="stop-color:#6b7280;stop-opacity:0.3" />
-                                        <stop offset="100%" style="stop-color:#9ca3af;stop-opacity:0.2" />
-                                    </linearGradient>
-                                </defs>
-                            </svg>
-                        `)}')`
+                        backgroundImage: `url(${BG.src})`
                     }}
                     initial={{ 
                         opacity: 0, 
-                        scale: 1.1,
-                        filter: "brightness(1.2)"
+                        scale: 1.1
                     }}
                     animate={{ 
-                        opacity: [0, 0.3, 0.25, 0.3],
-                        scale: [1.1, 1, 1.02, 1],
-                        filter: [
-                            "brightness(1.2)", 
-                            "brightness(1)", 
-                            "brightness(0.8)", 
-                            "brightness(1)"
-                        ]
+                        opacity: 1,
+                        scale: 1
                     }}
                     transition={{ 
-                        duration: 2.5,
-                        ease: "easeOut",
-                        times: [0, 0.6, 0.8, 1]
+                        duration: 1.5,
+                        ease: "easeOut"
                     }}
                 >
-                    {/* Flicker overlay for subtle dimming effect */}
-                    <motion.div
-                        className="absolute inset-0 bg-black"
-                        initial={{ opacity: 0 }}
-                        animate={{ 
-                            opacity: [0, 0, 0.1, 0, 0.05, 0, 0.08, 0]
-                        }}
-                        transition={{
-                            duration: 8,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            times: [0, 0.1, 0.2, 0.3, 0.5, 0.6, 0.8, 1]
-                        }}
-                    />
+                    {/* Subtle overlay for text readability */}
+                    <div className="absolute inset-0 bg-black/20"></div>
                 </motion.div>
             </div>
             
@@ -293,9 +259,9 @@ export default function HeroSection() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 1.4 }}
                     >
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        "The art of making the imposible possible."
                         <br className="hidden sm:block" />
-                        <span className="text-white/50">Sed do eiusmod tempor incididunt ut labore.</span>
+                        <span className="text-white/50">"We Don't Just Create Games, We Tell Stories."</span>
                     </motion.p>
                 </motion.div>
             </div>
@@ -312,20 +278,50 @@ export default function HeroSection() {
                         transition={{ duration: 0.8, ease: "easeInOut" }}
                     >
                         {carouselSlides.map((slide, index) => (
-                            <div 
+                            <motion.div 
                                 key={slide.id}
                                 className="w-full h-full flex-shrink-0 relative group cursor-pointer"
                                 onClick={() => window.open(slide.link, '_blank')}
+                                initial={{ opacity: 0, scale: 1.1 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.8, delay: index === currentSlide ? 0.2 : 0 }}
+                                whileHover={{ scale: 1.02 }}
                             >
                                 {/* Slide Background Image */}
-                                <div className="absolute inset-0">
-                                    <img 
-                                        src={slide.image}
+                                <motion.div 
+                                    className="absolute inset-0"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ duration: 1, delay: 0.3 }}
+                                >
+                                    <motion.img 
+                                        src={typeof slide.image === 'string' ? slide.image : slide.image.src}
                                         alt={slide.title}
                                         className="w-full h-full object-cover"
+                                        initial={{ scale: 1.2, filter: "brightness(0.7)" }}
+                                        animate={{ 
+                                            scale: 1, 
+                                            filter: [
+                                                "brightness(0.7)",
+                                                "brightness(1)",
+                                                "brightness(0.9)",
+                                                "brightness(1)"
+                                            ]
+                                        }}
+                                        transition={{ 
+                                            duration: 2,
+                                            ease: "easeOut",
+                                            times: [0, 0.4, 0.7, 1]
+                                        }}
+                                        whileHover={{ scale: 1.05 }}
                                     />
-                                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300"></div>
-                                </div>
+                                    <motion.div 
+                                        className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ duration: 0.5, delay: 0.5 }}
+                                    ></motion.div>
+                                </motion.div>
 
                                 {/* Slide Content Overlay with AnimatePresence */}
                                 <div className="absolute inset-0 flex items-end justify-center pb-24 md:pb-20">
@@ -386,26 +382,48 @@ export default function HeroSection() {
                                         </motion.div>
                                     </AnimatePresence>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
                     </motion.div>
 
                     {/* Navigation Arrows */}
-                    <button
-                        onClick={prevSlide}
-                        aria-label="Previous slide"
-                        className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors duration-300 backdrop-blur-sm"
+                    <motion.div 
+                        className="absolute left-4 top-1/2 -translate-y-1/2 z-20"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, delay: 1.5 }}
                     >
-                        <ChevronLeft className="w-6 h-6 text-white" />
-                    </button>
+                        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={prevSlide}
+                                className="p-3 hover:bg-white/10 hover:text-white border border-white/20 rounded-full bg-black/50 backdrop-blur-sm"
+                                aria-label="Previous slide"
+                            >
+                                <ChevronLeft className="h-5 w-5" />
+                            </Button>
+                        </motion.div>
+                    </motion.div>
                     
-                    <button
-                        onClick={nextSlide}
-                        aria-label="Next slide"
-                        className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors duration-300 backdrop-blur-sm"
+                    <motion.div 
+                        className="absolute right-4 top-1/2 -translate-y-1/2 z-20"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, delay: 1.5 }}
                     >
-                        <ChevronRight className="w-6 h-6 text-white" />
-                    </button>
+                        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={nextSlide}
+                                className="p-3 hover:bg-white/10 hover:text-white border border-white/20 rounded-full bg-black/50 backdrop-blur-sm"
+                                aria-label="Next slide"
+                            >
+                                <ChevronRight className="h-5 w-5" />
+                            </Button>
+                        </motion.div>
+                    </motion.div>
 
                     {/* Slide Indicators */}
                     {/* <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">

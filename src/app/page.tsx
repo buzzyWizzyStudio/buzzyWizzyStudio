@@ -3,15 +3,41 @@
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Trophy, Gamepad2, Mail, ArrowRight, Play } from "lucide-react"
+import { Trophy, Gamepad2, Mail, ArrowRight, Play, ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import HeroSection from "@/components/HeroSection"
 import CrewSection from "@/components/CrewSection"
 import { motion } from "framer-motion"
+import { useState, useRef } from "react"
+import MyNewProject from "../assets/jxBvZQ.png"
+import Losmen from "../assets/VpUjY1.png"
+import Tetra from "../assets/Jps9NB.png"
+import PressTheBeat from "../assets/V_sfHB.jpg"
+import Raturu from "../assets/n6WJ03.png"
 
 export default function BuzzyWizzyPage() {
+  const [scrollPosition, setScrollPosition] = useState(0)
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      const newPosition = Math.max(0, scrollPosition - 320)
+      setScrollPosition(newPosition)
+      scrollContainerRef.current.scrollTo({ left: newPosition, behavior: 'smooth' })
+    }
+  }
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      const maxScroll = scrollContainerRef.current.scrollWidth - scrollContainerRef.current.clientWidth
+      const newPosition = Math.min(maxScroll, scrollPosition + 320)
+      setScrollPosition(newPosition)
+      scrollContainerRef.current.scrollTo({ left: newPosition, behavior: 'smooth' })
+    }
+  }
+
   return (
     <div className="min-h-screen bg-black text-white font-mono">
       <Navbar />
@@ -48,7 +74,7 @@ export default function BuzzyWizzyPage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              Lorem ipsum dolor sit amet
+              BUZZY WIZZY STUDIO
             </motion.p>
           </motion.div>
 
@@ -65,7 +91,7 @@ export default function BuzzyWizzyPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Founded by a team of passionate developers and creative storytellers from President University, Buzzy Wizzy Studio focuses on developing high-quality edutainment experiences.
               </motion.p>
               <motion.p 
                 className="text-base text-white/60 mb-6 leading-relaxed"
@@ -73,7 +99,7 @@ export default function BuzzyWizzyPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
               >
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                We bridge the gap between education and entertainment by designing immersive games that teach real-world concepts — from programming logic to problem-solving — in ways students love.
               </motion.p>
               <motion.div 
                 className="grid grid-cols-2 gap-4"
@@ -82,8 +108,8 @@ export default function BuzzyWizzyPage() {
                 transition={{ duration: 0.6, delay: 0.8 }}
               >
                 {[
-                  { icon: Trophy, title: "QUALITY", desc: "Lorem ipsum dolor" },
-                  { icon: Gamepad2, title: "INNOVATION", desc: "Consectetur adipiscing" }
+                  { icon: Trophy, title: "QUALITY", desc: "We prioritize quality in every project." },
+                  { icon: Gamepad2, title: "INNOVATION", desc: "We embrace innovation to stay ahead." }
                 ].map((item, index) => (
                   <motion.div
                     key={index}
@@ -167,34 +193,98 @@ export default function BuzzyWizzyPage() {
             </motion.p>
           </motion.div>
 
-          <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
+          <div className="relative">
+            {/* Navigation Arrows */}
+            <motion.div 
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-20"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={scrollLeft}
+                  className="p-3 hover:bg-white/10 hover:text-white border border-white/20 rounded-full bg-black/50 backdrop-blur-sm"
+                  aria-label="Scroll left"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </Button>
+              </motion.div>
+            </motion.div>
+            
+            <motion.div 
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-20"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={scrollRight}
+                  className="p-3 hover:bg-white/10 hover:text-white border border-white/20 rounded-full bg-black/50 backdrop-blur-sm"
+                  aria-label="Scroll right"
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </Button>
+              </motion.div>
+            </motion.div>
+
+            <motion.div 
+              ref={scrollContainerRef}
+              className="overflow-x-auto scrollbar-hide pb-4"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              <div className="flex gap-6 w-max px-16">
             {[
               {
-                title: "Project Title",
-                genre: "Game Development",
-                status: "IN PROGRESS",
-                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                image: "/placeholder.svg?height=300&width=400",
-              },
-              {
-                title: "Project Title",
-                genre: "Web Development",
+                title: "My New Project (1)",
+                genre: "Backroom Horror",
                 status: "COMPLETED",
-                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                image: "/placeholder.svg?height=300&width=400",
+                description: "Adventure game where you play as a developer trapped inside your own digital creation.",
+                image: MyNewProject,
+                link: "https://buzzy-wizzy-studio.itch.io/my-new-project-1"
               },
               {
-                title: "Project Title",
-                genre: "Mobile App",
-                status: "IN PROGRESS",
-                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                image: "/placeholder.svg?height=300&width=400",
+                title: "LOSMEN",
+                genre: "Adventure Game",
+                status: "COMPLETED",
+                description: "Kamu terdampar sendirian di dunia yang udah rusak. Nggak ada arah, nggak ada tujuan pasti, yang penting bertahan hidup.",
+                image: Losmen,
+                link: "https://buzzy-wizzy-studio.itch.io/lost-man"
+              },
+              {
+                title: "TETRA",
+                genre: "Strategy Game",
+                status: "COMPLETED",
+                description: "What if Tetris wasn't just a puzzle, but a battle?",
+                image: Tetra,
+                link: "https://buzzy-wizzy-studio.itch.io/tetra"
+              },
+              {
+                title: "PRESS THE BEAT",
+                genre: "Interactive Story",
+                status: "COMPLETED",
+                description: "Developer: Placeholder Studio. Publisher: Placeholder Games Inc.",
+                image: PressTheBeat,
+                link: "https://buzzy-wizzy-studio.itch.io/press-the-beat"
+              },
+              {
+                title: "RATURU: HOME FEVER",
+                genre: "The Trials of Faith",
+                status: "COMPLETED",
+                description: "In RATURU : Home Fever, you step into the feverish dreams of a young child battling a high fever.",
+                image: Raturu,
+                link: "https://buzzy-wizzy-studio.itch.io/raturu-home-fever"
               },
             ].map((project, index) => (
               <motion.div
@@ -204,10 +294,12 @@ export default function BuzzyWizzyPage() {
                 transition={{ duration: 0.6, delay: 0.4 + index * 0.2 }}
                 whileHover={{ scale: 1.05, y: -10 }}
                 viewport={{ once: true }}
+                onClick={() => window.open(project.link, '_blank')}
+                className="flex-shrink-0 w-80"
               >
-                <Card className="glassmorphic-card p-0 overflow-hidden group cursor-pointer h-full">
+                <Card className="glassmorphic-card p-0 overflow-hidden group cursor-pointer h-[500px] flex flex-col">
                   <motion.div 
-                    className="aspect-video relative overflow-hidden"
+                    className="h-48 relative overflow-hidden flex-shrink-0"
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
                   >
@@ -228,52 +320,51 @@ export default function BuzzyWizzyPage() {
                       </Badge>
                     </motion.div>
                   </motion.div>
-                  <div className="p-4">
-                    <motion.h3 
-                      className="text-lg font-bold mb-1 tracking-wider"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: 0.8 + index * 0.2 }}
-                    >
-                      {project.title}
-                    </motion.h3>
-                    <motion.p 
-                      className="text-white/60 mb-1 text-sm uppercase tracking-wide"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: 1 + index * 0.2 }}
-                    >
-                      {project.genre}
-                    </motion.p>
-                    <motion.p 
-                      className="text-white/80 mb-3 text-sm"
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: 1.2 + index * 0.2 }}
-                    >
-                      {project.description}
-                    </motion.p>
+                  <div className="p-4 flex-1 flex flex-col">
+                    <div className="flex-1">
+                      <motion.h3 
+                        className="text-lg font-bold mb-2 tracking-wider"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: 0.8 + index * 0.2 }}
+                      >
+                        {project.title}
+                      </motion.h3>
+                      <motion.p 
+                        className="text-white/60 mb-2 text-sm uppercase tracking-wide"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: 1 + index * 0.2 }}
+                      >
+                        {project.genre}
+                      </motion.p>
+                      <motion.p 
+                        className="text-white/80 text-sm line-clamp-3 mb-4"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: 1.2 + index * 0.2 }}
+                      >
+                        {project.description}
+                      </motion.p>
+                    </div>
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: 1.4 + index * 0.2 }}
-                      whileHover={{ scale: 1.02 }}
+                      className="mt-auto"
                     >
                       <Button variant="ghost" className="w-full justify-between text-white hover:bg-white/10 text-sm">
                         LEARN MORE
-                        <motion.div
-                          whileHover={{ x: 5 }}
-                          transition={{ type: "spring", stiffness: 300 }}
-                        >
-                          <ArrowRight className="h-4 w-4" />
-                        </motion.div>
+                        <ArrowRight className="h-4 w-4" />
                       </Button>
                     </motion.div>
                   </div>
                 </Card>
               </motion.div>
             ))}
-          </motion.div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </motion.section>
 
