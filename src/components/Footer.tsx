@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Github, Twitter, Linkedin } from "lucide-react"
+import { Instagram, Linkedin, Video, MessageCircle } from "lucide-react"
 import { motion } from "framer-motion"
 
 export default function Footer() {
@@ -36,7 +36,7 @@ export default function Footer() {
                             transition={{ duration: 0.6, delay: 0.4 }}
                             viewport={{ once: true }}
                         >
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.
+                            The art of making the imposible possible. We Don't Just Create Games, We Tell Stories.
                         </motion.p>
                     </motion.div>
 
@@ -59,7 +59,7 @@ export default function Footer() {
                             {[
                                 { label: "About", href: "#about" },
                                 { label: "Projects", href: "#projects" },
-                                { label: "Crew", href: "#crew" },
+                                // { label: "Crew", href: "#crew" },
                                 { label: "Connect", href: "#contact" }
                             ].map((link, index) => (
                                 <motion.a 
@@ -94,9 +94,10 @@ export default function Footer() {
                         </motion.h4>
                         <div className="flex space-x-2">
                             {[
-                                { icon: Twitter, delay: 1.0 },
-                                { icon: Github, delay: 1.1 },
-                                { icon: Linkedin, delay: 1.2 }
+                                { icon: Instagram, delay: 1.0, url: "https://www.instagram.com/buzzy_wizzy_studio/", label: "Instagram" },
+                                { icon: Linkedin, delay: 1.1, url: "https://www.linkedin.com/company/buzzy-wizzy/?originalSubdomain=id", label: "LinkedIn" },
+                                { icon: Video, delay: 1.2, url: "https://www.tiktok.com/@buzzywizzy", label: "TikTok" },
+                                { icon: MessageCircle, delay: 1.3, url: "https://wa.me/6281265255752", label: "WhatsApp" } // Replace 6281234567890 with your WhatsApp number (country code + number, no + or spaces)
                             ].map((social, index) => (
                                 <motion.div
                                     key={index}
@@ -106,9 +107,16 @@ export default function Footer() {
                                     whileHover={{ scale: 1.2, rotate: 10 }}
                                     whileTap={{ scale: 0.9 }}
                                 >
-                                    <Button variant="ghost" size="icon" className="text-white/60 hover:text-white hover:bg-white/10">
-                                        <social.icon className="h-4 w-4" />
-                                    </Button>
+                                    <a 
+                                        href={social.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label={social.label}
+                                    >
+                                        <Button variant="ghost" size="icon" className="text-white/60 hover:text-white hover:bg-white/10">
+                                            <social.icon className="h-4 w-4" />
+                                        </Button>
+                                    </a>
                                 </motion.div>
                             ))}
                         </div>
@@ -129,7 +137,7 @@ export default function Footer() {
                         whileInView={{ opacity: 1 }}
                         transition={{ duration: 0.6, delay: 1.6 }}
                     >
-                        © 2025 BUZZY WIZZY. LOREM IPSUM DOLOR SIT AMET.
+                        © 2025 BUZZY WIZZY. Copyright Reserved.
                     </motion.div>
                 </motion.div>
             </div>

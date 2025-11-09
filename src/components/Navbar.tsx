@@ -36,7 +36,7 @@ export default function Navbar() {
                     {[
                         { label: "ABOUT", href: "#about" },
                         { label: "PROJECTS", href: "#projects" },
-                        { label: "CREW", href: "#crew" },
+                        // { label: "CREW", href: "#crew" },
                         { label: "CONNECT", href: "#contact" }
                     ].map((item, index) => (
                         <motion.a 
@@ -122,7 +122,7 @@ export default function Navbar() {
                             {[
                                 { label: "ABOUT", href: "#about" },
                                 { label: "PROJECTS", href: "#projects" },
-                                { label: "CREW", href: "#crew" },
+                                // { label: "CREW", href: "#crew" },
                                 { label: "CONNECT", href: "#contact" }
                             ].map((item, index) => (
                                 <motion.a
@@ -164,7 +164,8 @@ export default function Navbar() {
             {/* Contact Modal */}
             <ContactModal 
                 isOpen={isContactModalOpen} 
-                onClose={() => setIsContactModalOpen(false)} 
+                onClose={() => setIsContactModalOpen(false)}
+                recipientEmail="buzzywizzy0208@gmail.com" // Change this to your client's email address
             />
         </motion.nav>
     )

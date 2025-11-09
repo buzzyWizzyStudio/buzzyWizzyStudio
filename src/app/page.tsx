@@ -9,6 +9,7 @@ import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import HeroSection from "@/components/HeroSection"
 import CrewSection from "@/components/CrewSection"
+import ContactModal from "@/components/ContactModal"
 import { motion } from "framer-motion"
 import { useState, useRef } from "react"
 import MyNewProject from "../assets/jxBvZQ.png"
@@ -17,8 +18,52 @@ import Tetra from "../assets/Jps9NB.png"
 import PressTheBeat from "../assets/V_sfHB.jpg"
 import Raturu from "../assets/n6WJ03.png"
 
+const projects = [
+  {
+    title: "My New Project (1)",
+    genre: "Backroom Horror",
+    status: "COMPLETED",
+    description: "Adventure game where you play as a developer trapped inside your own digital creation.",
+    image: MyNewProject,
+    link: "https://buzzy-wizzy-studio.itch.io/my-new-project-1"
+  },
+  {
+    title: "LOSMEN",
+    genre: "Adventure Game",
+    status: "COMPLETED",
+    description: "Kamu terdampar sendirian di dunia yang udah rusak. Nggak ada arah, nggak ada tujuan pasti, yang penting bertahan hidup.",
+    image: Losmen,
+    link: "https://buzzy-wizzy-studio.itch.io/lost-man"
+  },
+  {
+    title: "TETRA",
+    genre: "Strategy Game",
+    status: "COMPLETED",
+    description: "What if Tetris wasn't just a puzzle, but a battle?",
+    image: Tetra,
+    link: "https://buzzy-wizzy-studio.itch.io/tetra"
+  },
+  {
+    title: "PRESS THE BEAT",
+    genre: "Interactive Story",
+    status: "COMPLETED",
+    description: "Developer: Placeholder Studio. Publisher: Placeholder Games Inc.",
+    image: PressTheBeat,
+    link: "https://buzzy-wizzy-studio.itch.io/press-the-beat"
+  },
+  {
+    title: "RATURU: HOME FEVER",
+    genre: "The Trials of Faith",
+    status: "COMPLETED",
+    description: "In RATURU : Home Fever, you step into the feverish dreams of a young child battling a high fever.",
+    image: Raturu,
+    link: "https://buzzy-wizzy-studio.itch.io/raturu-home-fever"
+  },
+]
+
 export default function BuzzyWizzyPage() {
   const [scrollPosition, setScrollPosition] = useState(0)
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   const scrollLeft = () => {
@@ -39,7 +84,7 @@ export default function BuzzyWizzyPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white font-mono">
+    <div className="min-h-screen bg-black text-white font-mono overflow-x-hidden max-w-full">
       <Navbar />
       <HeroSection />
 
@@ -193,10 +238,11 @@ export default function BuzzyWizzyPage() {
             </motion.p>
           </motion.div>
 
-          <div className="relative">
+          {/* Desktop: Horizontal Scroll View */}
+          <div className="hidden lg:block relative">
             {/* Navigation Arrows */}
             <motion.div 
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-20"
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-20 -ml-2"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
@@ -216,7 +262,7 @@ export default function BuzzyWizzyPage() {
             </motion.div>
             
             <motion.div 
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-20"
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-20 -mr-2"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
@@ -244,49 +290,8 @@ export default function BuzzyWizzyPage() {
               viewport={{ once: true }}
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
-              <div className="flex gap-6 w-max px-16">
-            {[
-              {
-                title: "My New Project (1)",
-                genre: "Backroom Horror",
-                status: "COMPLETED",
-                description: "Adventure game where you play as a developer trapped inside your own digital creation.",
-                image: MyNewProject,
-                link: "https://buzzy-wizzy-studio.itch.io/my-new-project-1"
-              },
-              {
-                title: "LOSMEN",
-                genre: "Adventure Game",
-                status: "COMPLETED",
-                description: "Kamu terdampar sendirian di dunia yang udah rusak. Nggak ada arah, nggak ada tujuan pasti, yang penting bertahan hidup.",
-                image: Losmen,
-                link: "https://buzzy-wizzy-studio.itch.io/lost-man"
-              },
-              {
-                title: "TETRA",
-                genre: "Strategy Game",
-                status: "COMPLETED",
-                description: "What if Tetris wasn't just a puzzle, but a battle?",
-                image: Tetra,
-                link: "https://buzzy-wizzy-studio.itch.io/tetra"
-              },
-              {
-                title: "PRESS THE BEAT",
-                genre: "Interactive Story",
-                status: "COMPLETED",
-                description: "Developer: Placeholder Studio. Publisher: Placeholder Games Inc.",
-                image: PressTheBeat,
-                link: "https://buzzy-wizzy-studio.itch.io/press-the-beat"
-              },
-              {
-                title: "RATURU: HOME FEVER",
-                genre: "The Trials of Faith",
-                status: "COMPLETED",
-                description: "In RATURU : Home Fever, you step into the feverish dreams of a young child battling a high fever.",
-                image: Raturu,
-                link: "https://buzzy-wizzy-studio.itch.io/raturu-home-fever"
-              },
-            ].map((project, index) => (
+              <div className="flex gap-6 w-max px-4">
+            {projects.map((project, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30, scale: 0.9 }}
@@ -365,10 +370,90 @@ export default function BuzzyWizzyPage() {
               </div>
             </motion.div>
           </div>
+
+          {/* Mobile/Tablet: Grid View */}
+          <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-6">
+            {projects.map((project, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+                whileHover={{ scale: 1.02, y: -5 }}
+                viewport={{ once: true }}
+                onClick={() => window.open(project.link, '_blank')}
+                className="w-full"
+              >
+                <Card className="glassmorphic-card p-0 overflow-hidden group cursor-pointer min-h-[400px] md:h-[450px] flex flex-col">
+                  <motion.div 
+                    className="h-48 md:h-56 relative overflow-hidden flex-shrink-0"
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Image
+                      src={project.image || "/placeholder.svg"}
+                      alt={project.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
+                    >
+                      <Badge className="absolute top-3 right-3 bg-white/20 text-white border-white/20 text-xs">
+                        {project.status}
+                      </Badge>
+                    </motion.div>
+                  </motion.div>
+                  <div className="p-4 flex-1 flex flex-col">
+                    <div className="flex-1">
+                      <motion.h3 
+                        className="text-lg font-bold mb-2 tracking-wider"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: 0.8 + index * 0.1 }}
+                      >
+                        {project.title}
+                      </motion.h3>
+                      <motion.p 
+                        className="text-white/60 mb-2 text-sm uppercase tracking-wide"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: 1 + index * 0.1 }}
+                      >
+                        {project.genre}
+                      </motion.p>
+                      <motion.p 
+                        className="text-white/80 text-sm line-clamp-3 mb-4"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: 1.2 + index * 0.1 }}
+                      >
+                        {project.description}
+                      </motion.p>
+                    </div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 1.4 + index * 0.1 }}
+                      className="mt-auto"
+                    >
+                      <Button variant="ghost" className="w-full justify-between text-white hover:bg-white/10 text-sm">
+                        LEARN MORE
+                        <ArrowRight className="h-4 w-4" />
+                      </Button>
+                    </motion.div>
+                  </div>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </motion.section>
 
-      <CrewSection />
+      {/* <CrewSection /> */}
 
       {/* Contact Section */}
       <motion.section 
@@ -409,7 +494,7 @@ export default function BuzzyWizzyPage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.
+              We're here to bring your vision to life. Let's create something extraordinary together.
             </motion.p>
             <motion.div 
               className="flex flex-col sm:flex-row gap-3 justify-center mb-6"
@@ -421,7 +506,11 @@ export default function BuzzyWizzyPage() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button size="lg" className="bg-white text-black hover:bg-white/90 font-mono font-bold text-sm tracking-wider">
+                <Button 
+                  size="lg" 
+                  className="bg-white text-black hover:bg-white/90 font-mono font-bold text-sm tracking-wider"
+                  onClick={() => setIsContactModalOpen(true)}
+                >
                   <motion.div
                     whileHover={{ rotate: 10 }}
                     transition={{ type: "spring", stiffness: 300 }}
@@ -437,6 +526,13 @@ export default function BuzzyWizzyPage() {
       </motion.section>
 
       <Footer />
+
+      {/* Contact Modal */}
+      <ContactModal 
+        isOpen={isContactModalOpen} 
+        onClose={() => setIsContactModalOpen(false)}
+        recipientEmail="buzzywizzy0208@gmail.com"
+      />
     </div>
   )
 }
